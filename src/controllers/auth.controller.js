@@ -1,8 +1,7 @@
-import * as authService from "../services/auth.service"
+import * as authService from "../services/auth.service.js";
 
-const login = (req, res,next) => {
-    const { email, password } = req.body;
-    authService.loginUser(email, password);
-        res.json({ token });
- 
-}
+export const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  const token = await authService.loginUser(email, password);
+  res.json({ token });
+};
