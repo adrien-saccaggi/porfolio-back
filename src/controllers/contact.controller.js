@@ -1,6 +1,7 @@
-export const sendContact = async (req,res,next) => {
+import * as ContactService from "../services/contact.service.js";
 
-const {name,email} = req.body;
-const contact = await contactService.sendContactEmail(req.body)
-res.json({ message: 'Message envoyé avec succès' })
-}
+export const sendContact = async (req, res) => {
+  const { name, email, message } = req.body;
+  await ContactService.sendContactEmail({ name, email, message });
+  res.status(200).json({ message: "Email envoyé avec succès" });
+};

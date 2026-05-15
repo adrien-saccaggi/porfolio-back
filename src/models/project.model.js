@@ -20,22 +20,16 @@ const create = async (data) => {
   );
   return findById(result.insertId);
 };
-const update = async (id, data) => {
-  const { title, description, tech_stack, github_url, demo_url, image_url } =
-    data;
+const update = async (
+  id,
+  { title, description, tech_stack, github_url, demo_url, image_url },
+) => {
   const [result] = await db.execute(
-    "UPDATE projects SET title=?, description=?, tech_stack=?, github_url=?, demo_url=?, image_url=? WHERE id=?",
-    [
-      title || null,
-      description || null,
-      tech_stack || null,
-      github_url || null,
-      demo_url || null,
-      image_url || null,
-      id,
-    ],
+    "UPDATE projects SET title = ?, description = ?, tech_stack = ?, github_url = ?, demo_url = ?, image_url = ? WHERE id = ?",
+    [title, description, tech_stack, github_url, demo_url, image_url, id],
   );
-  return findById(id);
+
+  return result.affectedRows === 1;
 };
 const remove = async (id) => {
   const [result] = await db.execute("DELETE FROM projects WHERE id = ?", [id]);

@@ -10,7 +10,7 @@ const router = Router();
 router.get("/", getAllProjects);
 router.get("/:id", getOneProject);
 router.post("/", authenticate, authorizeRoles('admin'),validate,validateProject,createOneProject,);
-router.put("/:id", authenticate,authorizeRoles('admin'),validate , validateProject, updateOneProject)
+router.put("/:id",authenticate,authorizeRoles('admin'),validate,updateOneProject,);
 router.delete("/:id", authenticate,authorizeRoles('admin'), deleteOneProject)
 
 

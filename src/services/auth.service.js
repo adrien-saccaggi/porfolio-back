@@ -4,6 +4,9 @@ import * as UserModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
 export async function loginUser(email, password) {
+  if(!email){
+    throw new AppError("jsp", 500)
+  }
   const user = await UserModel.findByEmail(email);
   if (!user) {
     throw new AppError("Identifiants invalides", 401);
