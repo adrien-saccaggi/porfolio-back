@@ -1,8 +1,11 @@
+import jwt from "jsonwebtoken";
+import AppError from "../errors/AppError.js";
+
 export const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return next(new AppError(401, "Token manquant"));
+    return next(new AppError("Token manquant", 401));
   }
 
   const token = authHeader.split(" ")[1];
@@ -12,6 +15,6 @@ export const authenticate = (req, res, next) => {
     req.user = payload;
     next();
   } catch {
-    next(new AppError(401, "Token invalide"));
+    next(new AppError("Token invalide", 401));
   }
 };

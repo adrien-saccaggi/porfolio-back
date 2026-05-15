@@ -3,9 +3,11 @@ import bcrypt from "bcrypt";
 import * as UserModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-export async function loginUser( email, password ) {
+export async function loginUser(email, password) {
+  if(!email){
+    throw new AppError("jsp", 500)
+  }
   const user = await UserModel.findByEmail(email);
-  console.log;
   if (!user) {
     throw new AppError("Identifiants invalides", 401);
   }
